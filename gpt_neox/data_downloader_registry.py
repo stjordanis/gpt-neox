@@ -113,10 +113,24 @@ class Enwik8(DataDownloader):
     def exists(self):
         return os.path.isfile(f"{self.base_dir}/enwik8.gz")
 
+class NoDownload(DataDownloader):
+    name = "none"
+    filetype = "none"
+    url = "non"
+
+    def extract(self):
+        pass
+
+    def download(self):
+        pass
+
+    def exists(self):
+        return True
 
 DATA_DOWNLOADERS = {
     "owt2": OWT2,
-    "enwik8": Enwik8
+    "enwik8": Enwik8,
+    "no_download": NoDownload
 }
 
 
