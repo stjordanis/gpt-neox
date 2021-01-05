@@ -113,31 +113,16 @@ class Enwik8(DataDownloader):
     def exists(self):
         return os.path.isfile(f"{self.base_dir}/enwik8.gz")
 
-class NoDownload(DataDownloader):
-    name = "none"
-    filetype = "none"
-    url = "non"
-
-    def extract(self):
-        pass
-
-    def download(self):
-        pass
-
-    def exists(self):
-        return True
-
 DATA_DOWNLOADERS = {
     "owt2": OWT2,
-    "enwik8": Enwik8,
-    "no_download": NoDownload
+    "enwik8": Enwik8
 }
 
 
 def prepare_data(dataset_name):
     DownloaderClass = DATA_DOWNLOADERS.get(dataset_name, None)
     if DownloaderClass is None:
-        raise NotImplementedError
+        print('No downloader class found - assuming data is already prepared')
     else:
         d = DownloaderClass()
         d.prepare()
